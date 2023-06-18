@@ -21,35 +21,30 @@
     <title>Dojo Survey Core</title>
 </head>
 
-<body class="bg-dark text-light container">
-    <form action=""
-        class="d-flex justify-content-center flex-row border border-white">
+<body class="bg-dark text-light container d-flex justify-content-center flex-row border border-white">
         <div class="p-2">
             <h1 class="justify-content-start"><u>Submitted Info</u></h1>
             <div class="result-section">
             </div>
             {# REMINDER THAT INPUTS NEED TO HAVE NAMES #}
             <div class="p-2">
-                <p>Name: {{ session['name'] }}</p>
+                <p>Name: {{ apples.name }}</p>
                 {# user result here #}
             </div>
             <div class="p-2">
-                <p>Dojo Location: {{ session['location'] }}</p>
+                <p>Dojo Location: {{ apples.location }}</p>
                 {# user result here #}
             </div>
             <div class="p-2">
-                <p>Favorite Language: {{ session['language'] }}</p>
+                <p>Favorite Language: {{ apples.language }}</p>
                 {# user result here #}
             </div>
             <div class="p-2 flex-column">
-                <p>Comments: {{ session['comment'] }}</p>
+                <p>Comments: {{ apples.comment }}</p>
                 {# user result here #}
             </div>
+            <div><a href="/" class="btn btn-primary"> Go Back</a></div>
         </div>
-            <div class="p-2 justify-content-end mt-auto">
-                {# button here #}
-            </div>
-    </form>
 
 
 

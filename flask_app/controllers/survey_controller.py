@@ -1,27 +1,29 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash, Flask
-from flask_app.models.survey_model import Dojo
+from flask_app.models.survey_model import User
 
 
 
-#! incomplete routes
+# Home Route
 @app.route('/')
-def main_page():
-    return render_template("index.html")
+def survey_home():
+    return render_template("input.html")
 
+# route for the button press to take us to receipt page
+@app.route('/receipt/<int:id>')
+def show_results(id):
+    #info we received from db is now stored in dojo
+    dojo=User.get_one({'id':id})
+    #apples connects this to html, dojo connects this route to the class method
+    return render_template('receipt.html', apples=dojo)
 
-#! incomplete routes
+# route to validate submitted data
 @app.route('/process', methods = ['POST'])
-def submit_data():
-    session['name'] = request.form['name']
-    session['location'] = request.form['location']
-    session['language'] = request.form['language']
-    session['comment'] = request.form['comment']
+def process_submit():
+    if not User.validate_dojo(request.form):
+        return redirect('/')
+    # insert form into becoming the user
+    dojos = User.save_submission(request.form)
 
-    print(request.form)
-    return redirect('/result')
+    return redirect(f'/receipt/{dojos}')
 
-#! incomplete routes
-@app.route('/result')
-def show_results():
-    return render_template('indexR.html')

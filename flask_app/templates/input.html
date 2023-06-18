@@ -22,16 +22,28 @@
 </head>
 
 <body class="bg-dark text-light container">
-    <form action="/process" method = 'POST'
+    <!-- using input type "submit" with class added to make look like a button, or if outside a form use a tage with bootstrap*-->
+    <form action="/process"
+        method='POST'
         class="d-flex justify-content-center flex-column border border-white">
+
         <div class="p-2 justify-content-start">
             <h1>Dojo Survey</h1>
+            <!-- flash message syntax-->
+            {% with messages = get_flashed_messages() %} <!-- declare a variable called messages -->
+            {% if messages %} <!-- check if there are any messages -->
+            {% for message in messages %} <!-- loop through the messages -->
+            <p>{{message}}</p> <!-- display each message in a paragraph tag -->
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
         </div>
         {# REMINDER THAT INPUTS NEED TO HAVE NAMES #}
         <div class="p-2">
             {# user input answer here #}
             <p>Your Name: </p>
-            <input type="text" name="name">
+            <input type="text"
+                name="name">
         </div>
         <div class="p-2">
             {# drop down list of locations (list Chicago, Seattle, Portland, Denver, Tucson) #}
@@ -50,18 +62,22 @@
             <select name="language">
                 <option value="Python">Python</option>
                 <option value="C#">C#</option>
+                <option value="C">C</option>
                 <option value="Java">Java</option>
+                <option value="JS">JS</option>
             </select>
         </div>
         <div class="p-2 flex-column">
             {# text area - user input: I like turtles. #}
-            <p>Comments:</p>
-            <textarea name="comment" id="userform" cols="30" rows="30">
+            <p>Comments (Required):</p>
+            <textarea name="comment"
+                id="userform"
+                cols="30"
+                rows="30">
             </textarea>
         </div>
         <div class="p-2 justify-content-end">
-            {# button here #}
-            <button class="btn btn-primary" type>Submit</button>
+                <input type="submit" name="Submit" class="btn btn-primary">
         </div>
     </form>
 
